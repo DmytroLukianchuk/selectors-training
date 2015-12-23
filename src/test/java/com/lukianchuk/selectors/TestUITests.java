@@ -2,12 +2,8 @@ package com.lukianchuk.selectors;
 
 import com.lukianchuk.selectors.webelements.CssSelectorsElementSearcher;
 import com.lukianchuk.selectors.webelements.ElementSearcher;
-import com.lukianchuk.selectors.webelements.SimpleSelectorsElementSearcher;
-import com.lukianchuk.selectors.webelements.XPathElementSearcher;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -17,11 +13,11 @@ public class TestUITests {
 
     ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
 
-    @After
-    public void tearDown() throws Exception {
-        elementSearcher.closePage();
+//    @After
+//    public void tearDown() throws Exception {
+//        elementSearcher.closePage();
 
-   }
+//   }
 
 //    private ElementSearcher getRigthElementSearcher() {
 //        String elementSelectorProperty = System.getProperty("element.selector");
@@ -55,22 +51,35 @@ public class TestUITests {
 
 
         @Test
-        public void checkNewButtonLinkTest() {
+        public void checkNewCommentAddedTest() {
             System.out.println("Open http://comments.azurewebsites.net/Editor/NewComment URL");
             elementSearcher.goToURL("http://comments.azurewebsites.net/Editor/NewComment");
 
-
             System.out.println("Enter valid data to Comment Text");
-            elementSearcher.findCommentTextField
+            elementSearcher.findCommentTextField().sendKeys("01 First Comment");
+
+            System.out.println("Check Cat3");
+            elementSearcher.findCatCheckBox().click();
+
+            System.out.println("Clcik > move checked Cat");
+            elementSearcher.findMoveToRightButton().click();
+
+            System.out.println("Click Save & Return button");
+            elementSearcher.findSaveAndReturnButton().click()
+
+            System.out.println("Go to 4th / last Page");
+            elementSearcher.findLastPageNumberButton().click();
+
+            String notAphaNumeric = "The Comment Text field should contain alphanumeric characters only";
+            String textFieldRequired = "The Comment Text field is required. ";
 
 
-            System.out.println("Click > button");
 
 
-            System.out.println("Click Save button");
 
 
-            Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment", elementSearcher.getCurrentURL());
+
+//            Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment", elementSearcher.getCurrentURL());
         }
 
 
@@ -81,7 +90,7 @@ public class TestUITests {
 
 
 
-        }
+
 
 
         @Test

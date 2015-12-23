@@ -17,10 +17,11 @@ public abstract class ElementSearcher {
     }
 
     public abstract WebElement findButtonNew();
-    public abstract WebElement findInputSearch();
-    public abstract WebElement findLabelName();
     public abstract WebElement findCommentTextField();
-
+    public abstract WebElement findCatCheckBox();
+    public abstract WebElement findMoveToRightButton();
+    public abstract WebElement findSaveAndReturnButton();
+    public abstract WebElement findLastPageNumberButton();
 
     public void closePage() {
         driver.quit();
