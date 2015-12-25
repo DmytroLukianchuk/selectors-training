@@ -21,9 +21,20 @@ public abstract class ElementSearcher {
     public abstract WebElement findCatCheckBox();
     public abstract WebElement findMoveToRightButton();
     public abstract WebElement findSaveAndReturnButton();
-    public abstract WebElement findLastPageNumberButton();
+    public abstract String checkCommentPresent();
+
+    public abstract WebElement findDuplicateButton();
+
+    public abstract String findCommentTextIsRequiredText();
 
     public void closePage() {
         driver.quit();
+
     }
+
+    public abstract WebElement checkDuplicateModalAppeared();
+
+    public abstract WebElement findFirstCommentCheckBox();
+
+    public abstract String checkCopyOfCommentText();
 }

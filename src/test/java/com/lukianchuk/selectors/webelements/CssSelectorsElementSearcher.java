@@ -28,9 +28,28 @@ public class CssSelectorsElementSearcher extends ElementSearcher {
     public WebElement findSaveAndReturnButton() {
         return driver.findElement(By.cssSelector(".buttonAsLink[value='Save & Return']"));
 }
-    public WebElement findLastPageNumberButton() {
-        return driver.findElement(By.ByLinkText(".buttonAsLink[value='Save & Return']"));
+
+    public String checkCommentPresent() {
+        return driver.findElement(By.cssSelector("td.textcolumn")).getText();
 }
+
+    public String findCommentTextIsRequiredText() {
+        return driver.findElement(By.cssSelector("span span")).getText();
+}
+    public WebElement findDuplicateButton() {
+        return driver.findElement(By.cssSelector(".buttonAsLink[value='Duplicate...']"));
+}
+    public WebElement checkDuplicateModalAppeared() {
+        return driver.findElement(By.cssSelector(".modal.ui-dialog-content.ui-widget-content"));
+    }
+
+    public WebElement findFirstCommentCheckBox() {
+        return driver.findElement(By.cssSelector("tr > td > input[value='1']"));
+    }
+
+    public String checkCopyOfCommentText() {
+        return driver.findElement(By.cssSelector("tr > td > input[value='1']"));
+    }
 
 
 }
