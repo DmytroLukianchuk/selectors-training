@@ -44,12 +44,7 @@ public class XPathSelectorsElementSearcher extends ElementSearcher {
     }
 
     public WebElement findFirstCommentCheckBox() {
-        return driver.findElement(By.xpath("//tr[1]/td[1]"));
+        return driver.findElement(By.xpath("//tbody/tr[1]/td[1]"));
     }
-
-    public String checkCopyOfCommentText() {
-        return driver.findElement(By.xpath("tr > td > input[value='1']")).toString();
-    }
-
 
 }

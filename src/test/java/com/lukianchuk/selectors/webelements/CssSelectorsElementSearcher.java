@@ -47,9 +47,5 @@ public class CssSelectorsElementSearcher extends ElementSearcher {
         return driver.findElement(By.cssSelector("tr > td > input[value='1']"));
     }
 
-    public String checkCopyOfCommentText() {
-        return driver.findElement(By.cssSelector("tr > td > input[value='1']"));
-    }
-
 
 }

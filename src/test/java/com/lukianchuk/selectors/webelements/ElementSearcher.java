@@ -36,5 +36,4 @@ public abstract class ElementSearcher {
 
     public abstract WebElement findFirstCommentCheckBox();
 
-    public abstract String checkCopyOfCommentText();
 }

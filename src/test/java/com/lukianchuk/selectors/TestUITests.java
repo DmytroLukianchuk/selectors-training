@@ -115,16 +115,11 @@ public class TestUITests {
             elementSearcher.findDuplicateButton().click();
 
             System.out.println("Check Comment Text is Copy of + firstCommentValue");
-            elementSearcher.checkCopyOfCommentText();
+            String expectedCommentValue = elementSearcher.findCommentTextField().getText();
+
+            System.out.println("Check Comment Text has Copy of + Comment");
+            Assert.assertEquals("Duplicate Comment is not correct", firstCommentValue, expectedCommentValue);
 
 
-
-
-
-            System.out.println("Click on Duplicate... button without checking any group check-box");
-            elementSearcher.findDuplicateButton().click();
-
-            System.out.println("Check that alert appears");
-            elementSearcher.checkDuplicateModalAppeared();
         }
     }
