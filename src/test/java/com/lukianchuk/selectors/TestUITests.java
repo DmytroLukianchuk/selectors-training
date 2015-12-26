@@ -1,7 +1,9 @@
 package com.lukianchuk.selectors;
 
+import com.lukianchuk.selectors.webelements.CssSelectorsElementSearcher;
 import com.lukianchuk.selectors.webelements.ElementSearcher;
 import com.lukianchuk.selectors.webelements.XPathSelectorsElementSearcher;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,32 +12,21 @@ import org.junit.Test;
  */
 public class TestUITests {
 
-//    ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
+// To change the selectors type from XPath to CSS just uncomment the string beneath and comment second one
+//        ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
     ElementSearcher elementSearcher = new XPathSelectorsElementSearcher();
 
-//    @After
-//    public void tearDown() throws Exception {
-//        elementSearcher.closePage();
+    @After
+    public void tearDown() throws Exception {
+        elementSearcher.closePage();
 
-//   }
+    }
 
-//    private ElementSearcher getRigthElementSearcher() {
-//        String elementSelectorProperty = System.getProperty("element.selector");
-//        System.out.println("PROPERTY: " + elementSelectorProperty);
-//
-//        if ("css-selector".equals(elementSelectorProperty)) {
-//            return new CssSelectorsElementSearcher();
-//        } else if ("simple-selector".equals(elementSelectorProperty)) {
-//            return new SimpleSelectorsElementSearcher();
-//        } else {
-//            return new XPathElementSearcher();
-//        }
-//    }
 
-    // ADDING NEW COMMENT TESTS
+// ADDING NEW COMMENT TESTS
 
         @Test
-        public void checkNewButtonLinkTest() {
+        public void checkNewButtonLinkTest () {
             System.out.println("Open http://comments.azurewebsites.net/ URL");
             elementSearcher.goToURL("http://comments.azurewebsites.net/");
 
@@ -44,14 +35,13 @@ public class TestUITests {
 
             System.out.println("Check that correct Page / URL is opened");
             Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment", elementSearcher.getCurrentURL());
-
             System.out.println("Enter valid data to Commment Text field");
             Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment", elementSearcher.getCurrentURL());
         }
 
 
         @Test
-        public void checkNewCommentAddedTest() {
+        public void checkNewCommentAddedTest () {
             System.out.println("Open http://comments.azurewebsites.net/Editor/NewComment URL");
             elementSearcher.goToURL("http://comments.azurewebsites.net/Editor/NewComment");
 
@@ -76,7 +66,7 @@ public class TestUITests {
         }
 
         @Test
-        public void checkRequiredFieldsErrorsTest() {
+        public void checkRequiredFieldsErrorsTest () {
             System.out.println("Open http://comments.azurewebsites.net/Editor/NewComment URL");
             elementSearcher.goToURL("http://comments.azurewebsites.net/Editor/NewComment");
 
@@ -89,7 +79,7 @@ public class TestUITests {
         }
 
         @Test
-        public void checkDuplicateDialogForNonChosenCatTest() {
+        public void checkDuplicateDialogForNonChosenCatTest () {
             System.out.println("Open http://comments.azurewebsites.net/");
             elementSearcher.goToURL("http://comments.azurewebsites.net/");
 
@@ -101,7 +91,7 @@ public class TestUITests {
         }
 
         @Test
-        public void checkDuplicateComment() {
+        public void checkDuplicateComment () throws InterruptedException {
             System.out.println("Open http://comments.azurewebsites.net/");
             elementSearcher.goToURL("http://comments.azurewebsites.net/");
 
@@ -115,10 +105,10 @@ public class TestUITests {
             elementSearcher.findDuplicateButton().click();
 
             System.out.println("Check Comment Text is Copy of + firstCommentValue");
-            String expectedCommentValue = elementSearcher.findCommentTextField().getText();
+            String actualCommentValue = elementSearcher.findCommentTextField().getAttribute("value");
 
             System.out.println("Check Comment Text has Copy of + Comment");
-            Assert.assertEquals("Duplicate Comment is not correct", firstCommentValue, expectedCommentValue);
+            Assert.assertEquals("Duplicate Comment is not correct", "Copy of" + firstCommentValue, actualCommentValue);
 
 
         }
