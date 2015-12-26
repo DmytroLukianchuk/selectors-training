@@ -20,9 +20,11 @@ public class XPathSelectorsElementSearcher extends ElementSearcher {
     public WebElement findCatCheckBox() {
         return driver.findElement(By.xpath("//input[@id='Categories' and @value='4']"));
     }
+
     public WebElement findMoveToRightButton() {
         return driver.findElement(By.xpath("//input[@name = 'CurSelect']"));
     }
+
     public WebElement findSaveAndReturnButton() {
         return driver.findElement(By.xpath("//input[@value = 'Save & Return']"));
     }

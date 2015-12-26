@@ -11,8 +11,11 @@ public abstract class ElementSearcher {
         driver.get(url);
     }
 
-    public String getCurrentURL() {
+    public void closePage() {
+        driver.quit();
+    }
 
+    public String getCurrentURL() {
         return driver.getCurrentUrl();
     }
 
@@ -22,18 +25,9 @@ public abstract class ElementSearcher {
     public abstract WebElement findMoveToRightButton();
     public abstract WebElement findSaveAndReturnButton();
     public abstract String checkCommentPresent();
-
     public abstract WebElement findDuplicateButton();
-
     public abstract String findCommentTextIsRequiredText();
-
-    public void closePage() {
-        driver.quit();
-
-    }
-
     public abstract WebElement checkDuplicateModalAppeared();
-
     public abstract WebElement findFirstCommentCheckBox();
 
 }
