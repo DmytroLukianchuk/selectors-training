@@ -30,4 +30,5 @@ public abstract class ElementSearcher {
     public abstract WebElement checkDuplicateModalAppeared();
     public abstract WebElement findFirstCommentCheckBox();
 
+    public abstract String checkErrorNumberFieldNotUnique();
 }

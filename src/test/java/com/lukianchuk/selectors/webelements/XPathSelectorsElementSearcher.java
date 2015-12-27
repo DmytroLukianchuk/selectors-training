@@ -48,4 +48,8 @@ public class XPathSelectorsElementSearcher extends ElementSearcher {
     public WebElement findFirstCommentCheckBox() {
         return driver.findElement(By.xpath("//tbody/tr[1]/td[1]"));
     }
+
+    public String checkErrorNumberFieldNotUnique() {
+        return driver.findElement(By.xpath("//div[@id='errorfield']")).getText();
+    }
 }
