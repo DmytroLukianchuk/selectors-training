@@ -3,9 +3,6 @@ package com.lukianchuk.selectors.webelements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by qa1 on 12/22/15.
- */
 public class CssSelectorsElementSearcher extends ElementSearcher {
 
     public WebElement findButtonNew() {
@@ -47,6 +44,22 @@ public class CssSelectorsElementSearcher extends ElementSearcher {
 
     public String checkErrorNumberFieldNotUnique() {
         return driver.findElement(By.cssSelector("div[id='errorfield']")).getText();
+    }
+
+    public WebElement findNumberField() {
+        return driver.findElement(By.cssSelector("input[id='Number']"));
+    }
+
+    public boolean checkCommentIsPresentOnPageNumber(int pageNumber) {
+        for (int lineCounter = 1; lineCounter < 10; lineCounter++) {
+            String currentNumber = driver.findElement(By.cssSelector("tr:nth-child(" + lineCounter + ") td[class='numbercolumn']")).getText();
+            if (currentNumber.equals("111")) {
+                System.out.println("Duplicate comment is on the " + pageNumber + " Page and on the " + lineCounter +
+                        " Line");
+                return true;
+            }
+        }
+        return false;
     }
 
 

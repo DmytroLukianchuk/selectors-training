@@ -3,9 +3,6 @@ package com.lukianchuk.selectors.webelements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by qa1 on 12/22/15.
- */
 public class XPathSelectorsElementSearcher extends ElementSearcher {
 
     public WebElement findButtonNew() {
@@ -51,5 +48,22 @@ public class XPathSelectorsElementSearcher extends ElementSearcher {
 
     public String checkErrorNumberFieldNotUnique() {
         return driver.findElement(By.xpath("//div[@id='errorfield']")).getText();
+    }
+
+    public WebElement findNumberField() {
+        return driver.findElement(By.xpath("//input[@id='Number']"));
+    }
+
+    public boolean checkCommentIsPresentOnPageNumber(int pageNumber) {
+        driver.get("http://comments.azurewebsites.net/?page=" + pageNumber);
+        for (int lineCounter = 1; lineCounter < 10; lineCounter++) {
+            String currentNumber = driver.findElement(By.xpath("//tr[" + lineCounter + "]/td[2]")).getText();
+            if (currentNumber.equals("111")) {
+                System.out.println("Duplicate comment is on the " + pageNumber + " Page and on the " + lineCounter +
+                        " Line");
+                return true;
+            }
+        }
+        return false;
     }
 }

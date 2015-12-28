@@ -1,25 +1,21 @@
 package com.lukianchuk.selectors;
 
+import com.lukianchuk.selectors.webelements.CssSelectorsElementSearcher;
 import com.lukianchuk.selectors.webelements.ElementSearcher;
-import com.lukianchuk.selectors.webelements.XPathSelectorsElementSearcher;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by qa1 on 12/22/15.
- */
 public class TestUITests {
 
 // To change the selectors type from XPath to CSS just uncomment the string beneath and comment second one
-//        ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
-    ElementSearcher elementSearcher = new XPathSelectorsElementSearcher();
+ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
+//    ElementSearcher elementSearcher = new XPathSelectorsElementSearcher();
 
-    @After
-    public void tearDown() throws Exception {
-        elementSearcher.closePage();
-
-    }
+//    @After
+//    public void tearDown() throws Exception {
+//        elementSearcher.closePage();
+//
+//    }
 
 
 // ADDING NEW COMMENT TESTS
@@ -120,12 +116,27 @@ public class TestUITests {
 
             System.out.println("Check number not unique error");
             Assert.assertEquals("Error string in not present / correct", "The Number field should contain value " +
-                            "from 0 to 999 and should be unique",
-                    elementSearcher.checkErrorNumberFieldNotUnique());
+                    "from 0 to 999 and should be unique", elementSearcher.checkErrorNumberFieldNotUnique());
 
+            System.out.println("Clearing the Number field");
+            elementSearcher.findNumberField().clear();
 
+            System.out.println("Change number field value to 111");
+            elementSearcher.findNumberField().sendKeys("111");
 
+            System.out.println("Click Save & Return button");
+            elementSearcher.findSaveAndReturnButton().click();
 
+            System.out.println("Find added Number within All Pages");
+            for (int pageNumber = 1; pageNumber <= 4; pageNumber++) {
+                if (elementSearcher.checkCommentIsPresentOnPageNumber(pageNumber)) {
+                    System.out.println("Comment is found");
+                } else {
+                    System.out.println("let's find Comment on the next page");
+                    elementSearcher.checkCommentIsPresentOnPageNumber(pageNumber);
+                }
+
+            }
 
 
 

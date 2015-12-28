@@ -31,4 +31,8 @@ public abstract class ElementSearcher {
     public abstract WebElement findFirstCommentCheckBox();
 
     public abstract String checkErrorNumberFieldNotUnique();
+
+    public abstract WebElement findNumberField();
+
+    public abstract boolean checkCommentIsPresentOnPageNumber(int pageNumber);
 }
