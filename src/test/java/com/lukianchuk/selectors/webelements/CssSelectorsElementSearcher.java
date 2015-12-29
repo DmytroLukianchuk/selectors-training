@@ -50,10 +50,11 @@ public class CssSelectorsElementSearcher extends ElementSearcher {
         return driver.findElement(By.cssSelector("input[id='Number']"));
     }
 
-    public boolean checkCommentIsPresentOnPageNumber(int pageNumber) {
+    public boolean checkCommentIsPresentOnPageNumber(String comment, int pageNumber) {
+        driver.get("http://comments.azurewebsites.net/?page=" + pageNumber);
         for (int lineCounter = 1; lineCounter < 10; lineCounter++) {
             String currentNumber = driver.findElement(By.cssSelector("tr:nth-child(" + lineCounter + ") td[class='numbercolumn']")).getText();
-            if (currentNumber.equals("111")) {
+            if (currentNumber.equals(comment)) {
                 System.out.println("Duplicate comment is on the " + pageNumber + " Page and on the " + lineCounter +
                         " Line");
                 return true;

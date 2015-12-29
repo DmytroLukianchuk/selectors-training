@@ -2,20 +2,23 @@ package com.lukianchuk.selectors;
 
 import com.lukianchuk.selectors.webelements.CssSelectorsElementSearcher;
 import com.lukianchuk.selectors.webelements.ElementSearcher;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestUITests {
 
-// To change the selectors type from XPath to CSS just uncomment the string beneath and comment second one
-ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
+    public static final String URL = "http://comments.azurewebsites.net/";
+    public static final String COMMENT_NUMBER = "111";
+    // To change the selectors type from XPath to CSS just uncomment the string beneath and comment second one
+    ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
 //    ElementSearcher elementSearcher = new XPathSelectorsElementSearcher();
 
-//    @After
-//    public void tearDown() throws Exception {
-//        elementSearcher.closePage();
-//
-//    }
+    @After
+    public void tearDown() throws Exception {
+        elementSearcher.closePage();
+
+    }
 
 
 // ADDING NEW COMMENT TESTS
@@ -23,7 +26,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
         @Test
         public void checkNewButtonLinkTest () {
             System.out.println("Open http://comments.azurewebsites.net/ URL");
-            elementSearcher.goToURL("http://comments.azurewebsites.net/");
+            elementSearcher.goToURL(URL);
 
             System.out.println("Click on New... button");
             elementSearcher.findButtonNew().click();
@@ -31,7 +34,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
             System.out.println("Check that correct Page / URL is opened");
             Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment",
                     elementSearcher.getCurrentURL());
-            System.out.println("Enter valid data to Commment Text field");
+            System.out.println("Enter valid data to Comment Text field");
             Assert.assertEquals("URLs are not equal", "http://comments.azurewebsites.net/Editor/NewComment",
                     elementSearcher.getCurrentURL());
         }
@@ -55,7 +58,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
             elementSearcher.findSaveAndReturnButton().click();
 
             System.out.println("Checking URL of main page");
-            Assert.assertEquals("URL is not main", "http://comments.azurewebsites.net/",
+            Assert.assertEquals("URL is not main", URL,
                     elementSearcher.getCurrentURL());
 
             System.out.println("Find added Comment");
@@ -81,7 +84,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
         @Test
         public void checkDuplicateDialogForNonChosenCatTest () {
             System.out.println("Open http://comments.azurewebsites.net/");
-            elementSearcher.goToURL("http://comments.azurewebsites.net/");
+            elementSearcher.goToURL(URL);
 
             System.out.println("Click on Duplicate... button without checking any group check-box");
             elementSearcher.findDuplicateButton().click();
@@ -93,7 +96,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
         @Test
         public void checkDuplicateComment () throws InterruptedException {
             System.out.println("Open http://comments.azurewebsites.net/");
-            elementSearcher.goToURL("http://comments.azurewebsites.net/");
+            elementSearcher.goToURL(URL);
 
             System.out.println("Check First Comment check-box and check");
             elementSearcher.findFirstCommentCheckBox().click();
@@ -104,7 +107,7 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
             System.out.println("Click on Duplicate... button");
             elementSearcher.findDuplicateButton().click();
 
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             System.out.println("Check Comment Text is Copy of + firstCommentValue");
             String actualCommentValue = elementSearcher.findCommentTextField().getAttribute("value");
 
@@ -121,19 +124,18 @@ ElementSearcher elementSearcher = new CssSelectorsElementSearcher();
             System.out.println("Clearing the Number field");
             elementSearcher.findNumberField().clear();
 
-            System.out.println("Change number field value to 111");
-            elementSearcher.findNumberField().sendKeys("111");
+            System.out.println("Change number field value to " + COMMENT_NUMBER);
+            elementSearcher.findNumberField().sendKeys(COMMENT_NUMBER);
 
             System.out.println("Click Save & Return button");
             elementSearcher.findSaveAndReturnButton().click();
 
             System.out.println("Find added Number within All Pages");
             for (int pageNumber = 1; pageNumber <= 4; pageNumber++) {
-                if (elementSearcher.checkCommentIsPresentOnPageNumber(pageNumber)) {
-                    System.out.println("Comment is found");
+                if (elementSearcher.checkCommentIsPresentOnPageNumber(COMMENT_NUMBER, pageNumber)) {
+                    System.out.println("Comment is found on " + pageNumber + " Page");
                 } else {
-                    System.out.println("let's find Comment on the next page");
-                    elementSearcher.checkCommentIsPresentOnPageNumber(pageNumber);
+                    System.out.println("No comment on the " + pageNumber + " Page. Let's find Comment on the next page");
                 }
 
             }

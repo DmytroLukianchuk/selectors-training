@@ -34,5 +34,5 @@ public abstract class ElementSearcher {
 
     public abstract WebElement findNumberField();
 
-    public abstract boolean checkCommentIsPresentOnPageNumber(int pageNumber);
+    public abstract boolean checkCommentIsPresentOnPageNumber(String comment, int pageNumber);
 }
